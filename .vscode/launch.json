@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-Tiscon10Application<tiscon10>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.tiscon10.Tiscon10Application",
+            "projectName": "tiscon10",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}

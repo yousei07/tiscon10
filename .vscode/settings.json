@@ -1,0 +1,10 @@
+{
+    "java.server.launchMode": "Standard",
+    "editor.inlayHints.enabled": "off",
+    "[java]": {
+        "editor.codeActionsOnSave": {
+            "source.organizeImports": "explicit"
+        }
+    },
+    "java.compile.nullAnalysis.mode": "disabled"
+}

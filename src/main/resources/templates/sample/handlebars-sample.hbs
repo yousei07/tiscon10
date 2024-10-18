@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>Handlebars Sample</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/water.css">
+</head>
+<body>
+  <h1>Handlebarsのサンプル</h1>
+
+  <div>
+    <h2>単一の値を表示する例</h2>
+    <h3>Spring</h3>
+    <pre><code>
+      // 単一の値を表示する例
+      model.addAttribute("price", 1000);
+    </code></pre>
+    <h3>Temlete</h3>
+    <pre><code>
+      この商品の価格は\{{price}}}円です。
+    </code></pre>
+    <h3>Result</h3>
+    この商品の価格は{{price}}円です。
+  </div>
+
+  <div>
+    <h2>クラスのプロパティを表示する例</h2>
+    <h3>Spring</h3>
+    <pre><code>
+      // クラスのプロパティを表示する例
+      model.addAttribute("product", new Product("うまい棒", 20));
+    </code></pre>
+    <h3>Template</h3>
+    <pre><code>
+      商品名: \{{product.name}}
+      価格: \{{product.price}}円
+    </code></pre>
+    <h3>Result</h3>
+      商品名: {{product.name}}<br>
+      価格: {{product.price}}円
+  </div>
+
+  <div>
+    <h2>Mapの値を表示する例</h2>
+    <h3>Spring</h3>
+    <pre><code>
+      // Mapの値を表示する例
+      model.addAttribute("person", Map.of("name", "TIS太郎", "age", 30));
+    </code></pre>
+    <h3>Template</h3>
+    <pre><code>
+      名前: \{{person.name}}
+      年齢: \{{person.age}}歳
+    </code></pre>
+    <h3>Result</h3>
+    名前: {{person.name}}<br>
+    年齢: {{person.age}}歳
+  </div>
+
+  <div>
+    <h2>リストの値（クラス）を表示する例</h2>
+    <h3>Spring</h3>
+    <pre><code>
+      // リストの値を表示する例
+      model.addAttribute("products", List.of(
+          new Product("うまい棒", 20),
+          new Product("ポテチ", 100),
+          new Product("チョコレート", 200)
+      ));
+    </code></pre>
+    <h3>Template</h3>
+    <pre><code>
+      &lt;ul&gt;
+      \{{#each products}}
+        &lt;li&gt;\{{this.name}}: \{{this.price}}円&lt;/li&gt;
+      \{{/each}}
+      &lt;/ul&gt;
+    </code></pre>
+    <code>this.</code>はあってもなくてもよい。<br>
+    <h3>Result</h3>
+    <ul>
+      {{#each products}}
+        <li>{{this.name}}: {{this.price}}円</li>
+      {{/each}}
+    </ul>
+  </div>
+
+  <div>
+    <h2>リストの値（単一）を表示する例</h2>
+    <h3>Spring</h3>
+    <pre><code>
+      // リストの値（単一）を表示する例
+      model.addAttribute("scores", List.of(78, 94, 85));
+    </code></pre>
+    <h3>Template</h3>
+    <pre><code>
+      &lt;ul&gt;
+      \{{#each scores}}
+        &lt;li&gt;\{{this}}点&lt;/li&gt;
+      \{{/each}}
+      &lt;/ul&gt;
+    </code></pre>
+
+    <h3>Result</h3>
+    <ul>
+      {{#each scores}}
+        <li>{{this}}点</li>
+      {{/each}}
+    </ul>
+  </div>
+
+  <div>
+    <h2>条件分岐の例</h2>
+    <h3>Spring</h3>
+    <pre><code>
+      // 条件分岐の例
+      model.addAttribute("isActive", true);
+    </code></pre>
+    <h3>Template</h3>
+    <pre><code>
+      \{{#if isActive}}
+        アクティブです。
+      \{{else}}
+        アクティブではありません。
+      \{{/if}}
+    </code></pre>
+    <h3>Result</h3>
+    {{#if isActive}}
+      アクティブです。
+    {{else}}
+      アクティブではありません。
+    {{/if}}
+  </div>
+
+  <div>
+    <h2>値比較の例（eq）</h2>
+    <h3>Spring</h3>
+    <pre><code>
+      // 値比較の例
+      model.addAttribute("previous", 100);
+      model.addAttribute("current", 100);
+    </code></pre>
+    <h3>Template</h3>
+    <pre><code>
+
+      \{{#eq previous current)}}
+        前回（\{{previous}}）と今回（\{{current}}）は同じです。
+      \{{/eq}}
+
+      【別例】
+      前回（\{{previous}}）と今回（\{{current}}）は...
+      \{{eq previous current yes='同じ' no='違う')}}
+      値です。
+    </code></pre>
+    <h3>Result</h3>
+
+    {{#eq previous current}}
+      前回（{{previous}}）と今回（{{current}}）は同じです。
+    {{/eq}}
+
+    <br><br>
+    【別解】<br>
+    前回（{{previous}}）と今回（{{current}}）は...<br>
+    {{eq previous current yes='同じ' no='違う'}}
+    値です。
+
+    <h3>Note</h3>
+    <p>
+    Handlebars.javaは、基本的な考え方はロジックレスであり、ロジックが必要な場合はJava側で予め処理しておく。
+    これによりテンプレート側に複雑なロジックが混入することを抑止できる。
+    </p>
+    <p>
+    しかし、ごく簡単なロジックの場合はテンプレート側で行ったほうが効率がよい場合もあり、
+    このような場合、ヘルパーを登録することで、eqのような比較を行うことができる。
+    </p>
+    <a href="https://github.com/jknack/handlebars.java/blob/master/handlebars/src/main/java/com/github/jknack/handlebars/helper/ConditionalHelpers.java">
+      ConditionalHelpers.java
+    </a>
+    <p>
+      ViewResolver（実体はHandlebarsViewResolver）に、ヘルパーを登録することでテンプレート側でヘルパーを利用できる。
+    </p>
+  </div>
+
+</body>
+</html>

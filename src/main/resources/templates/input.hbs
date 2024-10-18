@@ -1,0 +1,103 @@
+{{#partial "head" }}
+  <title>お見積り情報入力</title>
+{{/partial}}
+
+{{#partial "content"}}
+  <div class="container">
+    <form action="/confirm" class="form-horizontal" method="post">
+      <div class="progress-icon">
+        <img src="/img/progress_input.svg"/>
+      </div>
+      <div class="page-title">お見積り情報入力</div>
+
+      <div class="col-sm-12">
+        <fieldset>
+          <h2 class="sub-title">保険種別</h2>
+          <div class="form-group">
+            <label>
+              保険の選択
+              <select name="insuranceType">
+                {{#each insurances}}
+                  <option value="{{this.insuranceType}}">{{this.insuranceName}}</option>
+                {{/each}}
+              </select>
+            </label>
+          </div>
+        </fieldset>
+        <fieldset>
+          <h2 class="sub-title">ご本人について</h2>
+          <label>
+            氏名
+            <input type="text" name="kanjiName" value="{{userOrderForm.kanjiName}}"/>
+          </label>
+          <label>
+            シメイ（フリガナ）
+            <input type="text" name="kanaName" value="{{userOrderForm.kanaName}}"/>
+          </label>
+          <label>
+            生年月日
+            <input type="text" name="dateOfBirth" value="{{userOrderForm.dateOfBirth}}"/></label>
+          <label>
+            住所
+            <input type="text" name="address" value="{{userOrderForm.address}}"/>
+          </label>
+          <label>
+            電話番号
+            <input type="text" name="tel" value="{{userOrderForm.tel}}"/>
+          </label>
+          <label>
+            メールアドレス
+            <input type="text" name="email" value="{{userOrderForm.email}}"/>
+          </label>
+        </fieldset>
+        <fieldset>
+          <h2 class="sub-title">お勤め先・ご家族について</h2>
+          <h3 class="caption">配偶者有無</h3>
+          {{#each marriedTypes}}
+            <label>
+              <input type="radio" name="marriedType" value="{{this.code}}" {{#eq this.code userOrderForm.marriedTypeEnum.code}}checked{{/eq}}>
+              {{this.label}}
+            </label>
+          {{/each}}
+          <h3 class="caption">ご職業</h3>
+          {{#each jobTypes}}
+            <label>
+              <input type="radio" name="jobType" value="{{this.code}}" {{#eq this.code userOrderForm.jobTypeEnum.code}}checked{{/eq}}>
+              {{this.label}}
+            </label>
+          {{/each}}
+          <label class="caption">
+            昨年の所得（万円）
+            <input type="text" name="income" value="{{userOrderForm.income}}"/>
+          </label>
+        </fieldset>
+        <fieldset>
+          <h2 class="sub-title">ご病歴について</h2>
+          <div class="form-group">
+            <h3 class="caption">過去5年以内に、病気やケガで7日間以上にわたって医師の診察・検査・治療・投薬をうけたことがありますか</h3>
+            {{#each treatedTypes}}
+              <label>
+                <input type="radio" name="treatedType" value="{{this.code}}" {{#eq this.code userOrderForm.treatedTypeEnum.code}}checked{{/eq}}>
+                {{this.label}}
+              </label>
+            {{/each}}
+          </div>
+          <div class="form-group">
+            <label>
+              「はい」 を選んだ方は内容をご記入下さい（全角）
+              <input type="text" name="medicalHistory" value="{{userOrderForm.medicalHistory}}"/>
+            </label>
+          </div>
+        </fieldset>
+        <div class="form-group">
+          <div class="text-center">
+            <a class="btn btn-back" href="/" role="button">TOPへ戻る</a>
+            <button type="submit" class="btn btn-primary">ご入力内容の確認へ</button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+{{/partial}}
+
+{{> common/base }}

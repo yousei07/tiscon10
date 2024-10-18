@@ -1,0 +1,142 @@
+{{#partial "head" }}
+  <title>概算お見積もり結果</title>
+{{/partial}}
+
+{{#partial "content"}}
+  <div class="container">
+    <form action="/order" class="form-horizontal" method="post">
+      <div class="progress-icon">
+        <img src="/img/progress_result.svg"/>
+      </div>
+      <div class="page-title">あなたの保険料（年額）</div>
+      <div class="col-sm-12">
+        <div class="text-center">
+          <div class="primary-text"><span>{{estimateResult.annualFee}}</span>円</div>
+          <div>
+            詳細見積もり依頼は無料です。<br>
+            依頼完了後、電話番号へ数日以内にお電話させていただきます。<br>
+            ただし、混雑状況によっては、お電話させていただくまで、<br>
+            お時間をいただく場合がございます。<br>
+            ご了承ください。<br>
+            ご不明点がある場合は、下記のお問い合わせまでご連絡ください。<br>
+            お問い合わせ：000-0000-0000<br>
+            受付時間：平日9:00-18:00<br>
+          </div>
+          <button type="submit" name="proceed" class="btn btn-primary">詳細見積もり依頼へ</button>
+        </div>
+        <div class="col-sm-12">
+          <h2 class="sub-title">保険種別</h2>
+          <table class="table table-bordered">
+            <col span="1">
+            <col span="2">
+            <tbody>
+            <tr>
+              <th>保険の選択</th>
+              <td>
+                <span>{{insuranceName}}</span>
+              </td>
+              <input type="hidden" name="insuranceType" value="{{userOrderForm.insuranceType}}"/>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="col-sm-12">
+          <h2 class="sub-title">ご本人について</h2>
+          <table class="table table-bordered">
+            <col span="1">
+            <col span="2">
+            <tbody>
+            <tr>
+              <th>氏名</th>
+              <td>
+                <span>{{userOrderForm.kanjiName}}</span>
+              </td>
+              <input type="hidden" name="kanjiName" value="{{userOrderForm.kanjiName}}"/>
+            </tr>
+            <tr>
+              <th>シメイ（フリガナ）</th>
+              <td><span>{{userOrderForm.kanaName}}</span></td>
+              <input type="hidden" name="kanaName" value="{{userOrderForm.kanaName}}"/>
+            </tr>
+            <tr>
+              <th>生年月日</th>
+              <td><span>{{userOrderForm.dateOfBirth}}</span></td>
+              <input type="hidden" name="dateOfBirth" value="{{userOrderForm.dateOfBirth}}"/>
+            </tr>
+            <tr>
+              <th>住所</th>
+              <td><span>{{userOrderForm.address}}</span></td>
+              <input type="hidden" name="address" value="{{userOrderForm.address}}"/>
+            </tr>
+            <tr>
+              <th>電話番号</th>
+              <td><span>{{userOrderForm.tel}}</span></td>
+              <input type="hidden" name="tel" value="{{userOrderForm.tel}}"/>
+            </tr>
+            <tr>
+              <th>メールアドレス</th>
+              <td><span>{{userOrderForm.email}}</span></td>
+              <input type="hidden" name="email" value="{{userOrderForm.email}}"/>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      <div class="col-sm-12">
+        <h2 class="sub-title">集荷元・お届け先</h2>
+        <table class="table table-bordered">
+          <col span="1">
+          <col span="2">
+          <tbody>
+          <tr>
+            <th>配偶者有無</th>
+            <td><span>
+              {{userOrderForm.marriedTypeEnum.label}}
+            </span></td>
+            <input type="hidden" name="marriedType" value="{{userOrderForm.marriedType}}"/>
+          </tr>
+          <tr>
+            <th>ご職業</th>
+            <td><span>
+              {{userOrderForm.jobTypeEnum.label}}
+            </span></td>
+            <input type="hidden" name="jobType" value="{{userOrderForm.jobType}}"/>
+          </tr>
+          <tr>
+            <th>昨年の所得（万円）</th>
+            <td><span>{{userOrderForm.income}}</span></td>
+            <input type="hidden" name="income" value="{{userOrderForm.income}}"/>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="col-sm-12">
+        <h2 class="sub-title">ご病歴について</h2>
+        <table class="table table-bordered">
+          <col span="1">
+          <col span="2">
+          <tbody>
+          <tr>
+            <th>過去5年以内に、病気やケガで7日間以上にわたって医師の診察・検査・治療・投薬をうけたことがありますか</th>
+            <td><span>
+              {{userOrderForm.treatedTypeEnum.label}}
+            </span></td>
+            <input type="hidden" name="treatedType" value="{{userOrderForm.treatedType}}"/>
+          </tr>
+          <tr>
+            <th>「はい」 を選んだ方は内容をご記入下さい</th>
+            <td><span>{{userOrderForm.medicalHistory}}</span></td>
+            <input type="hidden" name="medicalHistory" value="{{userOrderForm.medicalHistory}}"/>
+          </tr>
+          </tbody>
+        </table>
+        <div class="form-group">
+          <div class="text-center">
+            <button type="submit" name="backToConfirm" class="btn btn-back">確認画面へ戻る</button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+{{/partial}}
+
+{{> common/base }}
