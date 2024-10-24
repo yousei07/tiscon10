@@ -56,4 +56,7 @@ HTMLテンプレートエンジン。使用例は、以下のファイルを参�
 - [コントローラー](./src/main/java/com/tiscon10/controller/sample/SampleController.java)
 - [テンプレート](./src/main/resources/templates/sample/handlebars-sample.hbs)
 
+## その他
 
+- データベース
+    - [H2 Databaseに登録したデータを確認する](docs/h2Database.md)
