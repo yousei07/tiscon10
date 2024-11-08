@@ -57,7 +57,7 @@ public class EstimateController {
         model.addAttribute("userOrderForm", emptyForm());
         // 全ての保険種別をプルダウン表示用に用意
         model.addAttribute("insurances", estimateService.getInsurances());
-        // 配偶者有無、ご職業、病歴有無の全選択肢をプルダウン表示用に用意
+        // 配偶者有無、ご職業、病歴有無の全選択肢をラジオボタン表示用に用意
         model.addAttribute("marriedTypes", MarriedType.values());
         model.addAttribute("jobTypes", JobType.values());
         model.addAttribute("treatedTypes", TreatedType.values());
