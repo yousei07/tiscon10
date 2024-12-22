@@ -63,10 +63,18 @@ public class EstimateService {
         double adjustmentRateByAge = estimateDAO.findAdjustmentRateByAge(age);
 
         // 保険料（年額）を計算する。
-        int annualFee = (int) (monthlyFee * 12 * adjustmentRateByAge);
+        int annualFee = (int) ((monthlyFee * 12 * adjustmentRateByAge));
+        double adjustmentRateByInsuranceType;
+        if(insuranceType == 1){
+            adjustmentRateByInsuranceType = annualFee*0.2;
+        } else if (insuranceType == 2){
+            adjustmentRateByInsuranceType = annualFee*0.35;
+        } else{
+            adjustmentRateByInsuranceType = annualFee*0.15;
+        }
 
         // 見積もり結果を返す。
-        EstimateResult estimateResult = new EstimateResult(annualFee, adjustmentRateByAge, age);
+        EstimateResult estimateResult = new EstimateResult(annualFee, adjustmentRateByAge, age, annualFee*adjustmentRateByInsuranceType);
         return estimateResult;
 
     }
